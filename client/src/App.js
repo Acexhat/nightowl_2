@@ -9,6 +9,7 @@ import {
 } from "react-router-dom";
 import AuthDashboard from './pages/authenticationDashboard';
 import Dashboard from './pages/dashboard';
+import OrderPage from './pages/orderPage';
 
 function App() {
   React.useEffect(() => {
@@ -22,6 +23,7 @@ function App() {
           <Route exact path="/login" element={<LogIn />} />
           <Route exact path="/signUp" element={<SignUp />} />
           <Route exact path="/dashboard" element={<Dashboard />} />
+          <Route exact path="/order/:id" element={<OrderPage />} />
         </Routes>
       </Router>
     </div>
