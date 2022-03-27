@@ -6,6 +6,29 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Acexhat/nightOwl__2.git"
+  },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Acexhat/nightOwl__2/issues"
+  },
+  "homepage": "https://github.com/Acexhat/nightOwl__2#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.2",
+    "cookie": "^0.4.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "helmet": "^5.0.2",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.2.8",
+    "nodemon": "^2.0.15",
+    "parser": "^0.1.4",
+    "uuid": "^8.3.2"
+  }
 }
