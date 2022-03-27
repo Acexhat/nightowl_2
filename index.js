@@ -1,16 +1,17 @@
 require("dotenv").config()
 const express = require("express");
+const bodyParser = require('body-parser')
 const app = express();
 const connectDB = require("./config/db");
 const errorHandler = require("./src/middlewares/error");
+const cors = require('cors');
+
 
 connectDB();
-
-app.use(express.json());
-
-app.get("/", (req, res, next) => {
-    res.send("Api running");
-});
+// app.use(express.json());
+app.use(cors());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json())
 
 // Connecting Routes
 app.use("/api/auth", require("./src/routes/auth"));

@@ -5,7 +5,9 @@ const User = require("../models/User");
 exports.login = async (req, res, next) => {
     const { email, password } = req.body;
 
-    // Check if email and password is provided
+    console.log(req.data)
+
+    // Check if email and assword is provided
     if (!email || !password) {
         return next(new ErrorResponse("Please provide an email and password", 400));
     }
