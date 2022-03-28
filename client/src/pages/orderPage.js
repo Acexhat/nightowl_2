@@ -16,12 +16,12 @@ export default function OrderPage(props) {
         const randomShipId = working_shipment_ids[Math.floor(Math.random() * working_shipment_ids.length)];
 
         const getTrackingDetails = (token, shipmentId) => {
-            var data = {
+            var data = JSON.stringify({
                 "token": token,
                 "shipmentId": shipmentId
-            };
+            });
             var config = {
-                method: 'GET',
+                method: 'get',
                 url: `/api/ship/getShiptrack`,
                 headers: {
                     'Authorization': `Bearer ${token}`,
