@@ -12,6 +12,6 @@ const {
 router.route("/login").post(registerShip);
 router.route("/getOrders").get(getAllOrders);
 router.route("/getShiptrack").get(getTrackingDetails);
-router.route("/getlatlang").post(getlatlang);
+router.route("/getlatlang").get(getlatlang);
 
 module.exports = router;

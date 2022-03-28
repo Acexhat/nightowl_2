@@ -58,7 +58,7 @@ export default function Map(props) {
             "address": address
         }
         var config = {
-            method: 'POST',
+            method: 'get',
             url: `/api/ship/getlatlang`,
             headers: headersList,
             data: bodyContent

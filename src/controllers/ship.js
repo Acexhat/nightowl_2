@@ -1,5 +1,5 @@
 const ErrorResponse = require("../utils/errorResponse");
-const axios = require('axios');
+var axios = require('axios');
 exports.registerShip = async (req, res, next) => {
     var data = JSON.stringify({
         "email": "ashish.kataria+hackathon@shiprocket.com",
@@ -90,14 +90,14 @@ exports.getlatlang = async (req, res, next) => {
 
     axios(config)
         .then(function (response) {
-            console.log(response.data.data[0]);
-            let results = {
-                lat: response.data.data[0].latitude,
-                lng: response.data.data[0].longitude
-            }
+            // console.log(response.data.data[0]);
+            // let results = {
+            //     "lat": response.data.data[0].latitude,
+            //     "lng": response.data.data[0].longitude
+            // }
             req.status(200).json({
                 success: true,
-                data: results
+                data: response.data
             })
         })
         .catch(function (error) {
