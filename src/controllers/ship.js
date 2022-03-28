@@ -55,7 +55,7 @@ exports.getAllOrders = async (req, res, next) => {
 exports.getTrackingDetails = async (req, res, next) => {
     // const { token, shipmentId } = req.body
     let shipmentId = 191686343;
-    let token = localStorage.getItem('ship_token');
+    let token = req.headers.authorization.split(" ")[1];
     var config = {
         method: 'get',
         url: `https://apiv2.shiprocket.in/v1/external/courier/track/shipment/${shipmentId}`,
