@@ -35,7 +35,7 @@ export default function Map(props) {
     const [selected, setSelected] = React.useState(false);
     const [latlan, setLatLang] = React.useState({
         lat: 28.7041,
-        lan: 77.1025
+        lng: 77.1025
     });
 
     const onMapClick = React.useCallback((e) => {
