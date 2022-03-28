@@ -28,7 +28,9 @@ exports.registerShip = async (req, res, next) => {
 };
 
 exports.getAllOrders = async (req, res, next) => {
-    const { token, pageNo } = req.body
+    // const { token, pageNo } = req.body
+    let pageNo = 1;
+    let token = localStorage.getItem('ship_token');
     var config = {
         method: 'get',
         url: `https://apiv2.shiprocket.in/v1/external/orders?page=${pageNo}`,
