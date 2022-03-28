@@ -2,31 +2,6 @@ import axios from 'axios';
 
 
 export const getShipRocketAuth = () => {
-    // var data = JSON.stringify({
-    //     "email": "ashish.kataria+hackathon@shiprocket.com",
-    //     "password": "hackathon@2022"
-    // });
-    // var proxy = "https://cors-anywhere.herokuapp.com/";
-    // var config = {
-    //     method: 'post',
-    //     url: `${proxy}https://apiv2.shiprocket.in/v1/external/auth/login`,
-    //     headers: {
-    //         'Content-Type': 'application/json'
-    //     },
-    //     data: data
-    // };
-
-    // axios(config)
-    //     .then(function (response) {
-    //         console.log(JSON.stringify(response.data));
-    //         localStorage.setItem('ship_token', response.data.token);
-    //         return response.data;
-    //     })
-    //     .catch(function (error) {
-    //         console.log(error);
-    //     });
-
-
     let headersList = {
         "Content-Type": "application/json"
     }
@@ -38,9 +13,7 @@ export const getShipRocketAuth = () => {
     }
 
     axios.request(reqOptions).then(function (response) {
-        // localStorage.setItem('token', response.data.token)
-        // navigate('/dashboard')
-        console.log(response.data);
+        localStorage.setItem('ship_token', response.data.data.token)
     }).catch((err) => {
         console.log(err);
     })

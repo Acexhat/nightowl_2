@@ -13,10 +13,8 @@ exports.registerShip = async (req, res, next) => {
         },
         data: data
     };
-    // const response = await axios.post()
     axios(config)
         .then(function (response) {
-            console.log(response);
             res
                 .status(200)
                 .json({
@@ -28,3 +26,27 @@ exports.registerShip = async (req, res, next) => {
             res.status(403)
         });
 };
+
+exports.getAllOrders = async (req, res, next) => {
+    const { token, pageNo } = req.body
+    var config = {
+        method: 'get',
+        url: `https://apiv2.shiprocket.in/v1/external/orders?page=${pageNo}`,
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        }
+    };
+    axios(config)
+        .then(function (response) {
+            res
+                .status(200)
+                .json({
+                    success: true,
+                    data: response.data,
+                });
+        })
+        .catch(function (error) {
+            res.status(403)
+        });
+}

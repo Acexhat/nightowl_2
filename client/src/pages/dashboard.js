@@ -11,28 +11,49 @@ export default function Dashboard(props) {
     const [allOrders, setAllOrders] = React.useState([]);
 
     const getAllOrder = (token, pageNo) => {
-        var data = JSON.stringify({
-            "email": "ashish.kataria+hackathon@shiprocket.com",
-            "password": "hackathon@2022"
-        });
-        var proxy = "https://cors-anywhere.herokuapp.com/";
-        var config = {
-            method: 'get',
-            url: `${proxy}https://apiv2.shiprocket.in/v1/external/orders?page=${pageNo}`,
-            headers: {
-                'Authorization': `Bearer ${token}`,
-                'Content-Type': 'application/json'
-            },
-            data: data
+        // var data = JSON.stringify({
+        //     "email": "ashish.kataria+hackathon@shiprocket.com",
+        //     "password": "hackathon@2022"
+        // });
+        // var config = {
+        //     method: 'get',
+        //     url: `https://apiv2.shiprocket.in/v1/external/orders?page=${pageNo}`,
+        //     headers: {
+        //         'Authorization': `Bearer ${token}`,
+        //         'Content-Type': 'application/json'
+        //     },
+        //     data: data
+        // };
+
+        // axios(config)
+        //     .then(function (response) {
+        //         setAllOrders([...allOrders, ...response.data.data])
+        //     })
+        //     .catch(function (error) {
+        //         console.log(error);
+        //     });
+        let headersList = {
+            "Content-Type": "application/json"
+        }
+
+        let bodyContent = {
+            "token": token,
+            "pageNo": pageNo
         };
 
-        axios(config)
-            .then(function (response) {
-                setAllOrders([...allOrders, ...response.data.data])
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+        let reqOptions = {
+            url: "/api/ship/getOrders",
+            method: "POST",
+            headers: headersList,
+            data: bodyContent
+        }
+
+        axios.request(reqOptions).then(function (response) {
+            console.log(response.data.data);
+            setAllOrders([...allOrders, ...response.data.data])
+        }).catch((err) => {
+            console.log(err);
+        })
 
     }
 

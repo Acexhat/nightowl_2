@@ -3,9 +3,11 @@ const router = express.Router();
 
 // Controllers
 const {
-    registerShip
+    registerShip,
+    getAllOrders
 } = require("../controllers/ship");
 
 router.route("/login").post(registerShip);
+router.route("/getOrders").post(getAllOrders);
 
 module.exports = router;
