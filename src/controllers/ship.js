@@ -29,7 +29,6 @@ exports.registerShip = async (req, res, next) => {
 
 exports.getAllOrders = async (req, res, next) => {
     const { token, pageNo } = req.body
-    console.log(token, page);
     var config = {
         method: 'get',
         url: `https://apiv2.shiprocket.in/v1/external/orders?page=${pageNo}`,
@@ -65,7 +64,6 @@ exports.getTrackingDetails = async (req, res, next) => {
 
     axios(config)
         .then(function (response) {
-            // setTrackingData(response.data.tracking_data);
             res
                 .status(200)
                 .json({
