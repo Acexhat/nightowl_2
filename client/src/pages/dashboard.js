@@ -27,7 +27,7 @@ export default function Dashboard(props) {
         }
 
         axios.request(reqOptions).then(function (response) {
-            setAllOrders([...allOrders, ...response.data.data])
+            setAllOrders([...allOrders, ...response.data.data.data])
         }).catch((err) => {
             console.log(err);
         })
