@@ -51,27 +51,35 @@ export default function Map(props) {
     }, []);
 
     const getLetLang = (address) => {
-        let headersList = {
-            "Content-Type": "application/json"
-        }
-        const bodyContent = {
-            "address": address
-        }
-        var config = {
-            method: 'get',
-            url: `/api/ship/getlatlang`,
-            headers: headersList,
-            data: bodyContent
-        };
+        // let headersList = {
+        //     "Content-Type": "application/json"
+        // }
+        // const bodyContent = {
+        //     "address": address
+        // }
+        // var config = {
+        //     method: 'get',
+        //     url: `/api/ship/getlatlang`,
+        //     headers: headersList,
+        //     data: bodyContent
+        // };
 
-        axios(config)
-            .then(function (response) {
-                console.log(response.data);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-
+        // axios(config)
+        //     .then(function (response) {
+        //         console.log(response.data);
+        //     })
+        //     .catch(function (error) {
+        //         console.log(error);
+        //     });
+        var geocoder = new window.google.maps.Geocoder();
+        var address = "delhi";
+        geocoder.geocode({ 'address': address }, function (results, status) {
+            if (status == 'OK') {
+                console.log(results[0].geometry.location);
+            } else {
+                alert('Geocode was not successful for the following reason: ' + status);
+            }
+        });
     }
 
     React.useEffect(() => {
