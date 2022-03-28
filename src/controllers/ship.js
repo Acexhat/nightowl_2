@@ -30,7 +30,7 @@ exports.registerShip = async (req, res, next) => {
 exports.getAllOrders = async (req, res, next) => {
     // const { token, pageNo } = req.body
     let pageNo = 1;
-    let token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjI0OTc2MDIsImlzcyI6Imh0dHBzOi8vYXBpdjIuc2hpcHJvY2tldC5pbi92MS9leHRlcm5hbC9hdXRoL2xvZ2luIiwiaWF0IjoxNjQ4NDEyNTc0LCJleHAiOjE2NDkyNzY1NzQsIm5iZiI6MTY0ODQxMjU3NCwianRpIjoiS3F6blVCNmJOQWhmVVpQMyJ9.sJh8K34SgPBNPv0B_5WtGDqh8cPeLcq6ba3QjFRhAAo";
+    let token = req.headers.authorization.split(" ")[1];
     var config = {
         method: 'get',
         url: `https://apiv2.shiprocket.in/v1/external/orders?page=${pageNo}`,
@@ -54,7 +54,8 @@ exports.getAllOrders = async (req, res, next) => {
 
 exports.getTrackingDetails = async (req, res, next) => {
     // const { token, shipmentId } = req.body
-    let shipmentId = 191686343;
+    const working_shipment_ids = [191686343, 193234428, 193234500, 193234599, 193235366, 193235441, 193235510, 193260621, 193264210, 197340105]
+    let shipmentId = working_shipment_ids[Math.floor(Math.random() * working_shipment_ids.length)];
     let token = req.headers.authorization.split(" ")[1];
     var config = {
         method: 'get',
@@ -73,6 +74,31 @@ exports.getTrackingDetails = async (req, res, next) => {
                     success: true,
                     data: response.data,
                 });
+        })
+        .catch(function (error) {
+            res.status(403)
+        });
+}
+
+exports.getlatlang = async (req, res, next) => {
+    let { address } = req.body
+    var config = {
+        method: 'get',
+        url: `http://api.positionstack.com/v1/forward?access_key=6098b9f368efb6feed8c1db1b5fd1c5c&query=${address}`,
+        headers: {}
+    };
+
+    axios(config)
+        .then(function (response) {
+            console.log(response.data.data[0]);
+            let results = {
+                lat: response.data.data[0].latitude,
+                lng: response.data.data[0].longitude
+            }
+            req.status(200).json({
+                success: true,
+                data: results
+            })
         })
         .catch(function (error) {
             res.status(403)

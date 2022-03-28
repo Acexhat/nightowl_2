@@ -51,21 +51,19 @@ export default function Map(props) {
     }, []);
 
     const getLetLang = (address) => {
-        var proxy = "https://cors-anywhere.herokuapp.com/";
+        const data = {
+            "address": address
+        }
         var config = {
-            method: 'get',
-            url: `${proxy}http://api.positionstack.com/v1/forward?access_key=6098b9f368efb6feed8c1db1b5fd1c5c&query=${address}`,
-            headers: {}
+            method: 'post',
+            url: `/api/ship/getlatlang`,
+            headers: {},
+            data: data
         };
 
         axios(config)
             .then(function (response) {
-                console.log(response.data.data[0]);
-                let results = {
-                    lat: response.data.data[0].latitude,
-                    lng: response.data.data[0].longitude
-                }
-                setLatLang(results)
+                console.log(response.data);
             })
             .catch(function (error) {
                 console.log(error);

@@ -5,11 +5,13 @@ const router = express.Router();
 const {
     registerShip,
     getAllOrders,
-    getTrackingDetails
+    getTrackingDetails,
+    getlatlang
 } = require("../controllers/ship");
 
 router.route("/login").post(registerShip);
 router.route("/getOrders").get(getAllOrders);
 router.route("/getShiptrack").get(getTrackingDetails);
+router.route("/getlatlang").post(getlatlang);
 
 module.exports = router;
