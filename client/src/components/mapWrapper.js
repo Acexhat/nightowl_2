@@ -51,9 +51,10 @@ export default function Map(props) {
     }, []);
 
     const getLetLang = (address) => {
+        var proxy = "https://cors-anywhere.herokuapp.com/";
         var config = {
             method: 'get',
-            url: `http://api.positionstack.com/v1/forward?access_key=6098b9f368efb6feed8c1db1b5fd1c5c&query=${address}`,
+            url: `${proxy}http://api.positionstack.com/v1/forward?access_key=6098b9f368efb6feed8c1db1b5fd1c5c&query=${address}`,
             headers: {}
         };
 

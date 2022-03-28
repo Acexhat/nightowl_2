@@ -20,10 +20,10 @@ export default function OrderPage(props) {
                 "email": "ashish.kataria+hackathon@shiprocket.com",
                 "password": "hackathon@2022"
             });
-
+            var proxy = "https://cors-anywhere.herokuapp.com/";
             var config = {
                 method: 'get',
-                url: `https://apiv2.shiprocket.in/v1/external/courier/track/shipment/${shipmentId}`,
+                url: `${proxy}https://apiv2.shiprocket.in/v1/external/courier/track/shipment/${shipmentId}`,
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json'
