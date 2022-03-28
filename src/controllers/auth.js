@@ -1,5 +1,5 @@
 const ErrorResponse = require("../utils/errorResponse");
-const User = require("../models/User");
+const User = require("../models/user");
 
 // @desc    Login user
 exports.login = async (req, res, next) => {
