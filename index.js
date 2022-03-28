@@ -5,6 +5,7 @@ const app = express();
 const connectDB = require("./config/db");
 const errorHandler = require("./src/middlewares/error");
 const cors = require('cors');
+var path = require('path');
 
 
 connectDB();
@@ -20,12 +21,9 @@ app.use("/api/auth", require("./src/routes/auth"));
 app.use("/api/private", require("./src/routes/private"));
 app.use("/api/ship", require('./src/routes/ship'));
 
-app.use("/signUp", function (req, res) {
-    res.status(200).json({
-        success: true
-    })
-})
-
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '/client/build/index.html'));
+});
 // Error Handler Middleware
 app.use(errorHandler);
 
