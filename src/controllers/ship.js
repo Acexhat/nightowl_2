@@ -1,4 +1,5 @@
 const ErrorResponse = require("../utils/errorResponse");
+const axios = require('axios');
 exports.registerShip = async (req, res, next) => {
     var data = JSON.stringify({
         "email": "ashish.kataria+hackathon@shiprocket.com",
@@ -12,8 +13,10 @@ exports.registerShip = async (req, res, next) => {
         },
         data: data
     };
+    // const response = await axios.post()
     axios(config)
         .then(function (response) {
+            console.log(response);
             res
                 .status(200)
                 .json({
