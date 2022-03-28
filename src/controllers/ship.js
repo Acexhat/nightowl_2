@@ -84,7 +84,7 @@ exports.getlatlang = async (req, res, next) => {
     const { address } = req.body;
     var config = {
         method: 'get',
-        url: `http://api.positionstack.com/v1/forward?access_key=6098b9f368efb6feed8c1db1b5fd1c5c&query=${address}`,
+        url: `http://api.positionstack.com/v1/forward?access_key=6098b9f368efb6feed8c1db1b5fd1c5c&query=delhi`,
         headers: {}
     };
 
