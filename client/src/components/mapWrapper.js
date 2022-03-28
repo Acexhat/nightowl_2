@@ -51,14 +51,17 @@ export default function Map(props) {
     }, []);
 
     const getLetLang = (address) => {
-        const data = JSON.stringify({
+        let headersList = {
+            "Content-Type": "application/json"
+        }
+        const bodyContent = {
             "address": address
-        })
+        }
         var config = {
-            method: 'post',
+            method: 'POST',
             url: `/api/ship/getlatlang`,
-            headers: {},
-            data: data
+            headers: headersList,
+            data: bodyContent
         };
 
         axios(config)
