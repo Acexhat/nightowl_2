@@ -23,6 +23,10 @@ export default function Dashboard(props) {
             url: "/api/ship/getOrders",
             method: "get",
             // headers: headersList,
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
             data: bodyContent
         }
 
