@@ -21,7 +21,7 @@ export default function OrderPage(props) {
                 "shipmentId": shipmentId
             };
             var config = {
-                method: 'get',
+                method: 'GET',
                 url: `/api/ship/getShiptrack`,
                 headers: {
                     'Authorization': `Bearer ${token}`,

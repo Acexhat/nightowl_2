@@ -21,7 +21,7 @@ export default function Dashboard(props) {
 
         let reqOptions = {
             url: "/api/ship/getOrders",
-            method: "POST",
+            method: "GET",
             headers: headersList,
             data: bodyContent
         }
