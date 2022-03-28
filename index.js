@@ -26,6 +26,10 @@ const server = app.listen(PORT, () =>
     console.log(`Sever running on port ${PORT}`)
 );
 
+if (process.env.NODE_ENV === "production") {
+    app.use(express.static('client/build'));
+}
+
 process.on("unhandledRejection", (err, promise) => {
     console.log(`Logged Error: ${err.message}`);
     server.close(() => process.exit(1));
