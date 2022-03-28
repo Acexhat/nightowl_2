@@ -51,9 +51,9 @@ export default function Map(props) {
     }, []);
 
     const getLetLang = (address) => {
-        const data = {
+        const data = JSON.stringify({
             "address": address
-        }
+        })
         var config = {
             method: 'post',
             url: `/api/ship/getlatlang`,
