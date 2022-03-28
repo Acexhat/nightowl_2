@@ -10,9 +10,9 @@ export default function Dashboard(props) {
     const [allOrders, setAllOrders] = React.useState([]);
 
     const getAllOrder = (token, pageNo) => {
-        let headersList = {
-            "Content-Type": "application/json"
-        }
+        // let headersList = {
+        //     "Content-Type": "application/json"
+        // }
 
         let bodyContent = {
             "token": token,
@@ -22,7 +22,7 @@ export default function Dashboard(props) {
         let reqOptions = {
             url: "/api/ship/getOrders",
             method: "get",
-            headers: headersList,
+            // headers: headersList,
             data: bodyContent
         }
 

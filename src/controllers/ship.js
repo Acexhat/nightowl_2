@@ -30,13 +30,12 @@ exports.registerShip = async (req, res, next) => {
 exports.getAllOrders = async (req, res, next) => {
     // const { token, pageNo } = req.body
     let pageNo = 1;
-    let token = localStorage.getItem('ship_token');
+    let token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjI0OTc2MDIsImlzcyI6Imh0dHBzOi8vYXBpdjIuc2hpcHJvY2tldC5pbi92MS9leHRlcm5hbC9hdXRoL2xvZ2luIiwiaWF0IjoxNjQ4NDEyNTc0LCJleHAiOjE2NDkyNzY1NzQsIm5iZiI6MTY0ODQxMjU3NCwianRpIjoiS3F6blVCNmJOQWhmVVpQMyJ9.sJh8K34SgPBNPv0B_5WtGDqh8cPeLcq6ba3QjFRhAAo";
     var config = {
         method: 'get',
         url: `https://apiv2.shiprocket.in/v1/external/orders?page=${pageNo}`,
         headers: {
             'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
         }
     };
     axios(config)
