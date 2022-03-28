@@ -16,6 +16,7 @@ app.use(bodyParser.json())
 // Connecting Routes
 app.use("/api/auth", require("./src/routes/auth"));
 app.use("/api/private", require("./src/routes/private"));
+app.use("/api/ship", require('./src/routes/ship'));
 
 // Error Handler Middleware
 app.use(errorHandler);
