@@ -1,6 +1,5 @@
 import * as React from 'react';
 import axios from 'axios'
-import { getShipRocketAuth } from '../services/service';
 import { Divider, Typography } from '@mui/material';
 import TableDetails from '../components/table';
 
@@ -11,27 +10,6 @@ export default function Dashboard(props) {
     const [allOrders, setAllOrders] = React.useState([]);
 
     const getAllOrder = (token, pageNo) => {
-        // var data = JSON.stringify({
-        //     "email": "ashish.kataria+hackathon@shiprocket.com",
-        //     "password": "hackathon@2022"
-        // });
-        // var config = {
-        //     method: 'get',
-        //     url: `https://apiv2.shiprocket.in/v1/external/orders?page=${pageNo}`,
-        //     headers: {
-        //         'Authorization': `Bearer ${token}`,
-        //         'Content-Type': 'application/json'
-        //     },
-        //     data: data
-        // };
-
-        // axios(config)
-        //     .then(function (response) {
-        //         setAllOrders([...allOrders, ...response.data.data])
-        //     })
-        //     .catch(function (error) {
-        //         console.log(error);
-        //     });
         let headersList = {
             "Content-Type": "application/json"
         }
@@ -49,7 +27,6 @@ export default function Dashboard(props) {
         }
 
         axios.request(reqOptions).then(function (response) {
-            console.log(response.data.data);
             setAllOrders([...allOrders, ...response.data.data])
         }).catch((err) => {
             console.log(err);
@@ -60,7 +37,25 @@ export default function Dashboard(props) {
     React.useEffect(() => {
         // Get authenticated with shiprocket
         if (!ship_token) {
-            setUserData(getShipRocketAuth());
+            const getShipRocketAuth = () => {
+                let headersList = {
+                    "Content-Type": "application/json"
+                }
+
+                let reqOptions = {
+                    url: "/api/ship/login",
+                    method: "POST",
+                    headers: headersList,
+                }
+
+                axios.request(reqOptions).then(function (response) {
+                    localStorage.setItem('ship_token', response.data.data.token);
+                    setShipToken(response.data.data.token)
+                }).catch((err) => {
+                    console.log(err);
+                })
+            }
+            getShipRocketAuth();
         }
     }, [])
 
