@@ -33,7 +33,10 @@ export default function Map(props) {
     });
     const [markers, setMarkers] = React.useState([]);
     const [selected, setSelected] = React.useState(false);
-    const [latlan, setLatLang] = React.useState();
+    const [latlan, setLatLang] = React.useState({
+        lat: 28.7041,
+        lan: 77.1025
+    });
 
     const onMapClick = React.useCallback((e) => {
         setMarkers((current) => [
