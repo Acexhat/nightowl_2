@@ -6,10 +6,10 @@ export const getShipRocketAuth = () => {
         "email": "ashish.kataria+hackathon@shiprocket.com",
         "password": "hackathon@2022"
     });
-
+    var proxy = "https://cors-anywhere.herokuapp.com/";
     var config = {
         method: 'post',
-        url: 'https://apiv2.shiprocket.in/v1/external/auth/login',
+        url: `${proxy}https://apiv2.shiprocket.in/v1/external/auth/login`,
         headers: {
             'Content-Type': 'application/json'
         },
