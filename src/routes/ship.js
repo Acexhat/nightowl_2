@@ -4,10 +4,12 @@ const router = express.Router();
 // Controllers
 const {
     registerShip,
-    getAllOrders
+    getAllOrders,
+    getTrackingDetails
 } = require("../controllers/ship");
 
 router.route("/login").post(registerShip);
-router.route("/getOrders").post(getAllOrders);
+router.route("/getOrders").get(getAllOrders);
+router.route("/getShiptrack").get(getTrackingDetails);
 
 module.exports = router;

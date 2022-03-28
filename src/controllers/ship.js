@@ -50,3 +50,29 @@ exports.getAllOrders = async (req, res, next) => {
             res.status(403)
         });
 }
+
+exports.getTrackingDetails = async (req, res, next) => {
+    const { token, shipmentId } = req.body
+    var config = {
+        method: 'get',
+        url: `https://apiv2.shiprocket.in/v1/external/courier/track/shipment/${shipmentId}`,
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        },
+    };
+
+    axios(config)
+        .then(function (response) {
+            // setTrackingData(response.data.tracking_data);
+            res
+                .status(200)
+                .json({
+                    success: true,
+                    data: response.data,
+                });
+        })
+        .catch(function (error) {
+            res.status(403)
+        });
+}

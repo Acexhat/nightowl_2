@@ -16,14 +16,13 @@ export default function OrderPage(props) {
         const randomShipId = working_shipment_ids[Math.floor(Math.random() * working_shipment_ids.length)];
 
         const getTrackingDetails = (token, shipmentId) => {
-            var data = JSON.stringify({
-                "email": "ashish.kataria+hackathon@shiprocket.com",
-                "password": "hackathon@2022"
-            });
-            var proxy = "https://cors-anywhere.herokuapp.com/";
+            var data = {
+                "token": token,
+                "shipmentId": shipmentId
+            };
             var config = {
                 method: 'get',
-                url: `${proxy}https://apiv2.shiprocket.in/v1/external/courier/track/shipment/${shipmentId}`,
+                url: `/api/ship/getShiptrack`,
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json'
@@ -33,7 +32,7 @@ export default function OrderPage(props) {
 
             axios(config)
                 .then(function (response) {
-                    setTrackingData(response.data.tracking_data);
+                    setTrackingData(response.data.data.tracking_data);
                 })
                 .catch(function (error) {
                     console.log(error);
