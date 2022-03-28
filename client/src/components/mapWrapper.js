@@ -9,6 +9,7 @@ import usePlacesAutocomplete, {
     getGeocode,
     getLatLng,
 } from "use-places-autocomplete";
+import Geocode from "react-geocode";
 import mapStyles from "./mapStyles";
 import axios from "axios";
 import DetailDialog from "./orderDetailsPopUp";
@@ -71,15 +72,16 @@ export default function Map(props) {
         //     .catch(function (error) {
         //         console.log(error);
         //     });
-        var geocoder = new window.google.maps.Geocoder();
-        var address = "delhi";
-        geocoder.geocode({ 'address': address }, function (results, status) {
-            if (status == 'OK') {
-                console.log(results[0].geometry.location);
-            } else {
-                alert('Geocode was not successful for the following reason: ' + status);
+        Geocode.setApiKey("AIzaSyCxybb6x6s3MOJUFj-9GfQ_V2zMtU5DY4c");
+        Geocode.fromAddress("Eiffel Tower").then(
+            (response) => {
+                const { lat, lng } = response.results[0].geometry.location;
+                console.log(lat, lng);
+            },
+            (error) => {
+                console.error(error);
             }
-        });
+        );
     }
 
     React.useEffect(() => {
