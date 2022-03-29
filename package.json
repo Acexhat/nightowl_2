@@ -20,7 +20,7 @@
   "bugs": {
     "url": "https://github.com/Acexhat/nightOwl__2/issues"
   },
-  "homepage": "https://github.com/Acexhat/nightOwl__2#readme",
+  "homepage": "https://myapp.herokuapp.com/",
   "dependencies": {
     "axios": "^0.26.1",
     "bcrypt": "^5.0.1",
