@@ -30,16 +30,16 @@ app.use(errorHandler);
 const PORT = process.env.PORT || 5000;
 
 app.get('/*', function (req, res) {
-    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+    res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
 });
-
-const server = app.listen(PORT, () =>
-    console.log(`Sever running on port ${PORT}`)
-);
 
 if (process.env.NODE_ENV === "production") {
     app.use(express.static('client/build'));
 }
+
+const server = app.listen(PORT, () =>
+    console.log(`Sever running on port ${PORT}`)
+);
 
 process.on("unhandledRejection", (err, promise) => {
     console.log(`Logged Error: ${err.message}`);
