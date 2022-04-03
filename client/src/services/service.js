@@ -7,7 +7,7 @@ export const getShipRocketAuth = () => {
     }
 
     let reqOptions = {
-        url: "/api/ship/login",
+        url: "api/ship/login",
         method: "POST",
         headers: headersList,
     }

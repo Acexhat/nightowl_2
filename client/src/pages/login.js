@@ -34,7 +34,7 @@ export default function LogIn() {
         };
 
         let reqOptions = {
-            url: "/api/auth/login",
+            url: "api/auth/login",
             method: "POST",
             headers: headersList,
             data: bodyContent

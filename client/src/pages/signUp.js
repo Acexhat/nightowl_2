@@ -36,7 +36,7 @@ export default function SignUp() {
             url: "api/auth/register",
             method: "POST",
             headers: headersList,
-            body: bodyContent,
+            data: bodyContent,
         }
 
         axios.request(reqOptions).then(function (response) {

@@ -18,7 +18,7 @@ import { selectUnstyledClasses } from "@mui/base";
 const libraries = ["places"];
 const mapContainerStyle = {
     height: "80vh",
-    width: "80vw",
+    width: "50vw",
 };
 const options = {
     styles: mapStyles,
@@ -107,7 +107,7 @@ export default function Map(props) {
             <GoogleMap
                 id="map"
                 mapContainerStyle={mapContainerStyle}
-                zoom={8}
+                zoom={14}
                 center={latlan}
                 options={options}
                 onClick={onMapClick}
