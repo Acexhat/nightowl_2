@@ -5,7 +5,7 @@ const User = require("../models/user");
 exports.login = async (req, res, next) => {
     const { email, password } = req.body;
 
-    console.log(req.data)
+    console.log("req.data")
 
     // Check if email and assword is provided
     if (!email || !password) {
@@ -43,7 +43,6 @@ exports.register = async (req, res, next) => {
             email,
             password,
         });
-
         sendToken(user, 200, res);
     } catch (err) {
         next(err);

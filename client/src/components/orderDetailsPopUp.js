@@ -36,7 +36,7 @@ export default function DetailDialog(props) {
                                 <div className={"container"}>
                                     <h6>Item Details</h6>
                                     <div className={"row"}>
-                                        <div className={"col"}> <img className={"img-fluid"} src="https://i.imgur.com/iItpzRh.jpg" /> </div>
+                                        <div className={"col"}> <img className={"img-fluid"} src="http://i.imgur.com/iItpzRh.jpg" /> </div>
                                         <div className="col-xs-6" style={{ paddingTop: "2vh" }}>
                                             <ul type={"none"}>
                                                 <li>Size: 11</li>

@@ -14,7 +14,7 @@ export default function AuthDashboard(props) {
             }
 
             let reqOptions = {
-                url: "/api/private",
+                url: "http://localhost:5000/api/private",
                 method: "GET",
                 headers: headersList,
             }

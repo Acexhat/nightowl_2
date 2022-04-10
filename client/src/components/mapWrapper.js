@@ -55,36 +55,40 @@ export default function Map(props) {
     }, []);
 
     const getLetLang = (address) => {
-        // let headersList = {
-        //     "Content-Type": "application/json"
-        // }
-        // const bodyContent = {
-        //     "address": address
-        // }
-        // var config = {
-        //     method: 'get',
-        //     url: `/api/ship/getlatlang`,
-        //     headers: headersList,
-        //     data: bodyContent
-        // };
+        let headersList = {
+            "Content-Type": "application/json"
+        }
+        const bodyContent = {
+            "address": address
+        }
+        var config = {
+            method: 'post',
+            url: `http://localhost:5000/api/ship/getlatlang`,
+            headers: headersList,
+            data: bodyContent
+        };
 
-        // axios(config)
-        //     .then(function (response) {
-        //         console.log(response.data);
-        //     })
-        //     .catch(function (error) {
-        //         console.log(error);
-        //     });
-        Geocode.setApiKey("AIzaSyCxybb6x6s3MOJUFj-9GfQ_V2zMtU5DY4c");
-        Geocode.fromAddress("Eiffel Tower").then(
-            (response) => {
-                const { lat, lng } = response.results[0].geometry.location;
-                console.log(lat, lng);
-            },
-            (error) => {
-                console.error(error);
-            }
-        );
+        axios(config)
+            .then(function (response) {
+                console.log(response.data.data);
+                setLatLang({
+                    lat: response.data.data.addresses[0].latitude,
+                    lng: response.data.data.addresses[0].longitude,
+                })
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+        // Geocode.setApiKey("AIzaSyCxybb6x6s3MOJUFj-9GfQ_V2zMtU5DY4c");
+        // Geocode.fromAddress("Eiffel Tower").then(
+        //     (response) => {
+        //         const { lat, lng } = response.results[0].geometry.location;
+        //         console.log(lat, lng);
+        //     },
+        //     (error) => {
+        //         console.error(error);
+        //     }
+        // );
     }
 
     React.useEffect(() => {
@@ -97,6 +101,11 @@ export default function Map(props) {
 
     const handlePopUpclose = () => {
         setSelected(false);
+    }
+
+    const latlan2 = {
+        lat: 20.7041,
+        lng: 73.1025
     }
 
     if (loadError) return "Error";
@@ -116,6 +125,13 @@ export default function Map(props) {
                 <Marker
                     key={`${latlan?.lat}-${latlan?.lng}`}
                     position={{ lat: latlan?.lat, lng: latlan?.lng }}
+                    onClick={() => {
+                        setSelected(true);
+                    }}
+                />
+                <Marker
+                    key={`${latlan2?.lat}-${latlan2?.lng}`}
+                    position={{ lat: latlan2?.lat, lng: latlan2?.lng }}
                     onClick={() => {
                         setSelected(true);
                     }}

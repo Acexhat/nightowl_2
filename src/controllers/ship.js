@@ -5,6 +5,7 @@ exports.registerShip = async (req, res, next) => {
         "email": "ashish.kataria+hackathon@shiprocket.com",
         "password": "hackathon@2022"
     });
+    console.log("hitting here", data);
     var config = {
         method: 'post',
         url: `https://apiv2.shiprocket.in/v1/external/auth/login`,
@@ -28,9 +29,7 @@ exports.registerShip = async (req, res, next) => {
 };
 
 exports.getAllOrders = async (req, res, next) => {
-    // const { token, pageNo } = req.body
-    let pageNo = 1;
-    let token = req.headers.authorization.split(" ")[1];
+    const { token, pageNo = 1 } = req.body
     var config = {
         method: 'get',
         url: `https://apiv2.shiprocket.in/v1/external/orders?page=${pageNo}`,
@@ -53,7 +52,6 @@ exports.getAllOrders = async (req, res, next) => {
 }
 
 exports.getTrackingDetails = async (req, res, next) => {
-    // const { token, shipmentId } = req.body
     const working_shipment_ids = [191686343, 193234428, 193234500, 193234599, 193235366, 193235441, 193235510, 193260621, 193264210, 197340105]
     let shipmentId = working_shipment_ids[Math.floor(Math.random() * working_shipment_ids.length)];
     let token = req.headers.authorization.split(" ")[1];
@@ -81,21 +79,18 @@ exports.getTrackingDetails = async (req, res, next) => {
 }
 
 exports.getlatlang = async (req, res, next) => {
-    // const { address } = req.body;
+    const { address } = req.body;
+    console.log(address)
     var config = {
         method: 'get',
-        url: `http://api.positionstack.com/v1/forward?access_key=6098b9f368efb6feed8c1db1b5fd1c5c&query=delhi`,
-        headers: {}
+        url: `http://api.radar.io/v1/geocode/forward?query=${address}`,
+        headers: {
+            'Authorization': 'prj_live_sk_9493aeeb5ed665c75c611da2dc7379d296dea19d'
+        }
     };
-
     axios(config)
         .then(function (response) {
-            // console.log(response.data.data[0]);
-            // let results = {
-            //     "lat": response.data.data[0].latitude,
-            //     "lng": response.data.data[0].longitude
-            // }
-            req.status(200).json({
+            res.status(200).json({
                 success: true,
                 data: response.data
             })

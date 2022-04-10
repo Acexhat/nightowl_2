@@ -23,8 +23,8 @@ export default function Dashboard(props) {
         };
 
         let reqOptions = {
-            url: "api/ship/getOrders",
-            method: "get",
+            url: "http://localhost:5000/api/ship/getOrders",
+            method: "post",
             // headers: headersList,
             headers: {
                 'Authorization': `Bearer ${token}`,
@@ -50,7 +50,7 @@ export default function Dashboard(props) {
                 }
 
                 let reqOptions = {
-                    url: "api/ship/login",
+                    url: "http://localhost:5000/api/ship/login",
                     method: "POST",
                     headers: headersList,
                 }

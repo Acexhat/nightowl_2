@@ -26,7 +26,7 @@ export default function OrderPage(props) {
             });
             var config = {
                 method: 'get',
-                url: `/api/ship/getShiptrack`,
+                url: `http://localhost:5000/api/ship/getShiptrack`,
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json'
@@ -143,7 +143,7 @@ export default function OrderPage(props) {
                             display: "flex",
                             justifyContent: "center",
                             alignItems: "center",
-                        }}><Map address={trackingData?.shipment_track?.designation || "delhi"} data={state} /></div>
+                        }}><Map address={trackingData?.shipment_track?.designation || "mumbai"} data={state} /></div>
                     </div>
                 </div>
             </div>

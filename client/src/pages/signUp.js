@@ -33,7 +33,7 @@ export default function SignUp() {
         });
 
         let reqOptions = {
-            url: "api/auth/register",
+            url: "http://localhost:5000/api/auth/register",
             method: "POST",
             headers: headersList,
             data: bodyContent,

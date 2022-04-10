@@ -10,8 +10,8 @@ const {
 } = require("../controllers/ship");
 
 router.route("/login").post(registerShip);
-router.route("/getOrders").get(getAllOrders);
+router.route("/getOrders").post(getAllOrders);
 router.route("/getShiptrack").get(getTrackingDetails);
-router.route("/getlatlang").get(getlatlang);
+router.route("/getlatlang").post(getlatlang);
 
 module.exports = router;

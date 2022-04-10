@@ -7,7 +7,7 @@ export const getShipRocketAuth = () => {
     }
 
     let reqOptions = {
-        url: "api/ship/login",
+        url: "http://localhost:5000/api/ship/login",
         method: "POST",
         headers: headersList,
     }
@@ -28,7 +28,7 @@ export const getAllOrder = (token, callback) => {
 
     var config = {
         method: 'get',
-        url: 'https://apiv2.shiprocket.in/v1/external/orders',
+        url: 'http://apiv2.shiprocket.in/v1/external/orders',
         headers: {
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'
@@ -55,7 +55,7 @@ export const getSpecificOrder = (token, orderId) => {
 
     var config = {
         method: 'get',
-        url: `https://apiv2.shiprocket.in/v1/external/orders/show/${orderId}`,
+        url: `http://apiv2.shiprocket.in/v1/external/orders/show/${orderId}`,
         headers: {
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'
@@ -81,7 +81,7 @@ export const getTrackingDetails = (token, shipmentId) => {
 
     var config = {
         method: 'get',
-        url: `https://apiv2.shiprocket.in/v1/external/courier/track/shipment/${shipmentId}`,
+        url: `http://apiv2.shiprocket.in/v1/external/courier/track/shipment/${shipmentId}`,
         headers: {
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'
