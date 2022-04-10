@@ -10,6 +10,7 @@ import TableRow from '@mui/material/TableRow';
 import TablePagination from '@mui/material/TablePagination';
 import { useNavigate } from 'react-router';
 import SearchBar from "material-ui-search-bar";
+import { ThemeProvider } from '@emotion/react';
 
 const columns = [
     { id: 'id', label: 'Order No.', minWidth: 170 },
@@ -43,7 +44,11 @@ const columns = [
 const useStyles = makeStyles({
     root: {
         width: '95%',
+        boxShadow: "7px 10px 20px grey"
         // height:"88%"
+    },
+    trow:{
+        height:"0.5rem"
     },
     headerRoot: {
         "& .MuiTableCell-root": {
@@ -51,10 +56,19 @@ const useStyles = makeStyles({
         }
     },
     container: {
-        minHeight: 500,
-        maxHeight: 500,
-        borderRadius: "2rem"
+        minHeight: 520,
+        maxHeight: 520,
+        // borderRadius: "2rem"
     },
+    nodata: {
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height:"32.5rem",
+        color:"#877f7f",
+        fontWeight:"750",
+        fontSize:"2.5rem"
+    }
 });
 
 export default function TableDetails({ originalRows, getMoreOrder }) {
@@ -110,7 +124,7 @@ export default function TableDetails({ originalRows, getMoreOrder }) {
                 onCancelSearch={() => cancelSearch()}
             />
             <TableContainer className={classes.container}>
-                <Table stickyHeader aria-label="sticky table">
+                {rows.length > 0 ? <Table stickyHeader aria-label="sticky table">
                     <TableHead className={classes.headerRoot}>
                         <TableRow style={{ backgroundColor: "rgb(175 221 214)" }}>
                             {columns.map((column) => (
@@ -125,14 +139,14 @@ export default function TableDetails({ originalRows, getMoreOrder }) {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {rows?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, index) => {
+                        {(rows?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, index) => {
                             return (
-                                <TableRow style={index % 2 ? { background: "white" } : { background: "rgb(175 221 214)" }} hover role="checkbox" tabIndex={-1} key={row.code}>
+                                <TableRow className={classes.trow} style={index % 2 ? { background: "white" } : { background: "#def0f7" }} hover role="checkbox" tabIndex={-1} key={row.code}>
                                     {columns.map((column) => {
                                         const value = column.id === "name" ? row.products[0][column.id] : row[column.id];
                                         return (
                                             column.id === "id" ? <TableCell style={{
-                                                textDecoration: "underline",
+                                                // textDecoration: "underline",
                                                 fontWeight: "600",
                                                 color: "blue",
                                                 cursor: "pointer"
@@ -146,10 +160,12 @@ export default function TableDetails({ originalRows, getMoreOrder }) {
                                         );
                                     })}
                                 </TableRow>
-                            );
-                        })}
+                            )
+                        }))}
                     </TableBody>
-                </Table>
+                </Table> : <div className={classes.nodata}>
+                    No Data Found
+                </div>}
             </TableContainer>
             <TablePagination
                 rowsPerPageOptions={[10, 25, 100]}
