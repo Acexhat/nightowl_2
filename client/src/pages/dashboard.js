@@ -7,6 +7,7 @@ import BackupTableIcon from '@mui/icons-material/BackupTable';
 import QueryStatsIcon from '@mui/icons-material/QueryStats';
 import { Avatar } from '@mui/material';
 import './styles.css';
+import { API_PREFIX } from '../utils/Constants';
 
 export default function Dashboard(props) {
 
@@ -26,7 +27,7 @@ export default function Dashboard(props) {
         };
 
         let reqOptions = {
-            url: "http://localhost:5000/api/ship/getOrders",
+            url: `${API_PREFIX}api/ship/getOrders`,
             method: "post",
             // headers: headersList,
             headers: {
@@ -53,7 +54,7 @@ export default function Dashboard(props) {
                 }
 
                 let reqOptions = {
-                    url: "http://localhost:5000/api/ship/login",
+                    url: `${API_PREFIX}/api/ship/login`,
                     method: "POST",
                     headers: headersList,
                 }
@@ -168,11 +169,7 @@ export default function Dashboard(props) {
                 position: "relative"
             }}>
                 <div style={{
-                    // display: "flex",
-                    // justifyContent: "start",
-                    // alignItems: "center",
                     height: "15%",
-                    // flexDirection: "column"
                 }}>
                     <div style={{
                         height: "100%",

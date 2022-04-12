@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useNavigate } from 'react-router';
 import axios from 'axios';
+import { API_PREFIX } from '../utils/Constants';
 
 export default function AuthDashboard(props) {
     const navigate = useNavigate();
@@ -14,7 +15,7 @@ export default function AuthDashboard(props) {
             }
 
             let reqOptions = {
-                url: "http://localhost:5000/api/private",
+                url: `${API_PREFIX}api/private`,
                 method: "GET",
                 headers: headersList,
             }

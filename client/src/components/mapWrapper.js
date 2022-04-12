@@ -14,11 +14,13 @@ import mapStyles from "./mapStyles";
 import axios from "axios";
 import DetailDialog from "./orderDetailsPopUp";
 import { selectUnstyledClasses } from "@mui/base";
+import { API_PREFIX } from "../utils/Constants";
 
 const libraries = ["places"];
 const mapContainerStyle = {
-    height: "80vh",
-    width: "50vw",
+    height: "100%",
+    width: "100%",
+    borderRadius: "4px"
 };
 const options = {
     styles: mapStyles,
@@ -63,7 +65,7 @@ export default function Map(props) {
         }
         var config = {
             method: 'post',
-            url: `http://localhost:5000/api/ship/getlatlang`,
+            url: `${API_PREFIX}api/ship/getlatlang`,
             headers: headersList,
             data: bodyContent
         };
@@ -112,7 +114,13 @@ export default function Map(props) {
     if (!isLoaded) return "Loading...";
 
     return (
-        <div>
+        <div style={{
+            height: "100%",
+            width: "100%",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center"
+        }}>
             <GoogleMap
                 id="map"
                 mapContainerStyle={mapContainerStyle}

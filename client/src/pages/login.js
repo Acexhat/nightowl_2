@@ -15,6 +15,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import signUpLogo from '../assets/signup_img.jpg'
 import axios from 'axios';
 import { useNavigate } from 'react-router';
+import { API_PREFIX } from '../utils/Constants';
 
 const theme = createTheme();
 
@@ -34,7 +35,7 @@ export default function LogIn() {
         };
 
         let reqOptions = {
-            url: "http://localhost:5000/api/auth/login",
+            url: `${API_PREFIX}api/auth/login`,
             method: "POST",
             headers: headersList,
             data: bodyContent

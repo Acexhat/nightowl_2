@@ -6,13 +6,17 @@ import { Button } from '@mui/material';
 import { Divider, Typography, List, ListItem, ListItemIcon, ListItemText, CircularProgress } from '@mui/material';
 import logo from '../assets/logo.webp';
 import BackupTableIcon from '@mui/icons-material/BackupTable';
+import { Avatar } from '@mui/material';
 import QueryStatsIcon from '@mui/icons-material/QueryStats';
+import InfoDashboard from './InfoDashboard';
+import { API_PREFIX } from '../utils/Constants';
 
 export default function OrderPage(props) {
     const { id } = useParams();
     const { state } = useLocation();
+    console.log('state', state);
     const navigate = useNavigate();
-    const [trackingData, setTrackingData] = React.useState();
+    const [trackingData, setTrackingData] = React.useState([]);
 
     const working_shipment_ids = [191686343, 193234428, 193234500, 193234599, 193235366, 193235441, 193235510, 193260621, 193264210, 197340105]
 
@@ -26,7 +30,7 @@ export default function OrderPage(props) {
             });
             var config = {
                 method: 'get',
-                url: `http://localhost:5000/api/ship/getShiptrack`,
+                url: `${API_PREFIX}api/ship/getShiptrack`,
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json'
@@ -36,117 +40,132 @@ export default function OrderPage(props) {
 
             axios(config)
                 .then(function (response) {
-                    setTrackingData(response.data.data.tracking_data);
+                    setTrackingData(response?.data?.data?.tracking_data);
                 })
                 .catch(function (error) {
                     console.log(error);
                 });
         }
         getTrackingDetails(localStorage.getItem('ship_token'), randomShipId);
-
     }, [])
+
+    const handleListItemClick = (data) => {
+        if (data === "Orders") {
+            navigate('/dashboard');
+        }
+    }
 
     return (
         <div style={{
             height: "100vh",
             width: "100vw",
             backgroundColor: "#EDEDED",
+            display: "flex"
         }}>
             <div style={{
-                // padding: "0rem 0.75rem",
-                display: "flex",
-                justifyContent: "start",
-                alignItems: "center",
+                width: "15%",
                 height: "100%",
-                flexDirection: "column"
+                background: "linear-gradient( #8A88FF, #EDEDED)"
             }}>
                 <div style={{
-                    height: "10%",
+                    height: "100%",
+                    // borderTop: "1px solid #ccc",
                     width: "100%",
-                    backgroundColor: "#388F81",
-                    display: "flex",
-                    justifyContent: "start",
-                    alignItems: "center",
-                    // position: "relative",
+                    borderRadius: "0px 2rem 2rem 0px",
+                    boxShadow: "0px 10px 20px grey",
+                    backgroundColor: "#FFF",
+                    // border: "1px solid red",
                 }}>
-                    <picture>
-                        <source srcset={logo} type="image/webp" />
-                        <img style={{
-                            height: "3.5rem",
-                            // position: "absolute",
-                            left: "1.5rem",
-                            top: "0.5rem",
-                        }} src={logo} alt="logo" />
-                    </picture>
-                    <Typography variant="h4" style={{
-                        fontWeight: "700",
-                        color: "#fff",
-                        marginLeft:"27.5rem"
-                    }}> Order Details and Real Time Tracking </Typography>
-                </div>
-                <div style={{
-                    display: "flex",
-                    width: "100%",
-                    height: "90%"
-                }}>
-                    <div style={{
-                        width: "20%",
-                        height: "100%",
-                    }}>
-                        <div style={{
-                            height: "100%",
-                            // borderTop: "1px solid #ccc",
-                            width: "100%",
-                            backgroundColor: "#388F81",
-                            // border: "1px solid red",
-                        }}>
-                            <List>
-                                {['Orders', 'Tracking Dashboard'].map((text, index) => (
-                                    <div style={{
-                                        display: "flex"
-                                    }}>
-                                        {index % 2 != 0 ? <div style={{
-                                            height: "3rem",
-                                            width: "5px",
-                                            backgroundColor: "white",
-                                            borderRadius: "0px 4px 4px 0px"
-                                        }}>
-                                        </div> : null}
-                                        <ListItem style={{
-                                            // backgroundColor: "#388F81",
-                                            height: "3rem",
-                                            color: "#fff",
-                                            marginLeft: "1rem",
-                                            borderWidth: "90%",
-                                            marginBottom: "0.5rem"
-                                        }} button key={text}>
-                                            <ListItemIcon style={{
-                                                color: "#fff",
-                                            }}>
-                                                {index % 2 === 0 ? <BackupTableIcon /> : <QueryStatsIcon />}
-                                            </ListItemIcon>
-                                            <ListItemText primary={text} />
-                                        </ListItem>
-                                    </div>
-                                ))}
-                            </List>
-                        </div>
-                    </div>
-                    <div style={{
-                        width: "80%",
+                    <img style={{
+                        height: "3.5rem",
+                        width: "4rem",
                         display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        backgroundColor: "rgb(41 56 53)",
-                    }}>
-                        <div style={{
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
-                        }}><Map address={trackingData?.shipment_track?.designation || "mumbai"} data={state} /></div>
-                    </div>
+                        padding: "0.5rem"
+                    }} src={logo} alt="logo" />
+                    <List>
+                        {['Orders', 'Tracking Dashboard'].map((text, index) => (
+                            <div style={{
+                                display: "flex"
+                            }}>
+                                {index % 2 != 0 ? <div style={{
+                                    height: "3rem",
+                                    width: "5px",
+                                    backgroundColor: "black",
+                                    borderRadius: "0px 4px 4px 0px"
+                                }}>
+                                </div> : null}
+                                <ListItem
+                                    onClick={() => handleListItemClick(text)}
+                                    style={{
+                                        // backgroundColor: "#388F81",
+                                        height: "3rem",
+                                        color: "black",
+                                        marginLeft: "1rem",
+                                        borderWidth: "90%",
+                                        marginBottom: "0.5rem"
+                                    }} button key={text}>
+                                    <ListItemIcon style={{
+                                        color: "black",
+                                    }}>
+                                        {index % 2 === 0 ? <BackupTableIcon /> : <QueryStatsIcon />}
+                                    </ListItemIcon>
+                                    <ListItemText primary={text} />
+                                </ListItem>
+                            </div>
+                        ))}
+                    </List>
                 </div>
             </div>
-        </div>
+            <div style={{
+                display: "flex",
+                width: "85%",
+                height: "100%",
+                flexDirection: "column",
+                position: "relative"
+            }}>
+                <div style={{
+                    height: "15%",
+                }}>
+                    <div style={{
+                        height: "100%",
+                        width: "100%",
+                        background: "linear-gradient(to right, #8A88FF, #34C9FE)",
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "flex-start",
+                    }}>
+                        <Typography variant="h4" style={{
+                            fontWeight: "700",
+                            width: "22%",
+                            paddingTop: "2.25rem",
+                            fontSize: "1.5rem",
+                            color: "#FBFBFF",
+                        }}> Tracking Dashboard {id} </Typography>
+                        <div className="avatarContainer">
+                            <Avatar src={"https://avatars.dicebear.com/api/male/akshatbhskar.png"} style={{
+                                height: "3rem",
+                                width: "3rem",
+                                border: "1px solid #FFFFFF",
+                                boxShadow: "0px 0px 5px #FFFFFF",
+                                cursor: "pointer"
+                            }}>H</Avatar>
+                        </div>
+                    </div>
+                </div>
+
+                <div style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    height: "92%",
+                    width: "100%",
+                    position: "absolute",
+                    top: "7.5%",
+                }}>
+                    <InfoDashboard address={trackingData?.shipment_track?.designation || "mumbai"} state={state} trackingData={trackingData} />
+                </div>
+            </div>
+            {/* </div> */}
+        </div >
     );
 }

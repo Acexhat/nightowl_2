@@ -22,6 +22,8 @@
   },
   "homepage": "https://myapp.herokuapp.com/",
   "dependencies": {
+    "@material-ui/lab": "^4.0.0-alpha.61",
+    "@material-ui/styles": "^4.11.5",
     "axios": "^0.26.1",
     "bcrypt": "^5.0.1",
     "bcryptjs": "^2.4.3",
@@ -36,6 +38,8 @@
     "mongoose": "^6.2.8",
     "nodemon": "^2.0.15",
     "parser": "^0.1.4",
+    "react-beautiful-horizontal-timeline": "^6.0.3",
+    "react-horizontal-timeline": "^1.5.3",
     "uuid": "^8.3.2"
   }
 }

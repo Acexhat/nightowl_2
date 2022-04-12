@@ -1,5 +1,5 @@
 import axios from 'axios';
-
+import { API_PREFIX } from '../utils/Constants';
 
 export const getShipRocketAuth = () => {
     let headersList = {
@@ -7,7 +7,7 @@ export const getShipRocketAuth = () => {
     }
 
     let reqOptions = {
-        url: "http://localhost:5000/api/ship/login",
+        url: `${API_PREFIX}api/ship/login`,
         method: "POST",
         headers: headersList,
     }

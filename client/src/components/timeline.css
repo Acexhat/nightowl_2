@@ -1,0 +1,116 @@
+body {
+  background: #e8eeff;
+}
+#app {
+  /* padding: 50px 0; */
+  /* padding-left: 2rem; */
+}
+.timeline {
+  /* margin: 50px 0; */
+  list-style-type: none;
+  display: flex;
+  padding: 0;
+  text-align: center;
+}
+.timeline li {
+  transition: all 200ms ease-in;
+}
+.timestamp {
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 0px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-weight: 100;
+}
+.status {
+  padding: 0px 40px;
+  display: flex;
+  justify-content: center;
+  border-top: 4px solid #3e70ff;
+  position: relative;
+  transition: all 200ms ease-in;
+}
+
+.status span {
+  font-weight: 600;
+  padding-top: 20px;
+}
+.status span:before {
+  content: "";
+  width: 25px;
+  height: 25px;
+  background-color: #e8eeff;
+  border-radius: 25px;
+  border: 4px solid #3e70ff;
+  position: absolute;
+  top: -1.1rem;
+  left: calc(50% - 12px);
+  transition: all 200ms ease-in;
+  cursor: pointer;
+}
+.final_status {
+  padding: 0px 40px;
+  display: flex;
+  justify-content: center;
+  border-top: 4px solid #3e70ff;
+  position: relative;
+  transition: all 200ms ease-in;
+}
+
+.final_status span {
+  font-weight: 600;
+  padding-top: 20px;
+}
+.final_status span:before {
+  content: "";
+  width: 25px;
+  height: 25px;
+  background-color: #e8eeff;
+  border-radius: 25px;
+  border: 4px solid #25D366;
+  position: absolute;
+  top: -1.1rem;
+  left: calc(100% - 12px);
+  transition: all 200ms ease-in;
+  cursor: pointer;
+}
+.swiper-control {
+  text-align: right;
+}
+
+.swiper-container {
+  width: 100%;
+  height: 250px;
+  margin: 50px 0;
+  overflow: hidden;
+  padding: 0 20px 30px 20px;
+}
+.swiper-slide {
+  width: 150px;
+  text-align: center;
+  font-size: 10px;
+}
+.swiper-slide:nth-child(2n) {
+  width: 20%;
+}
+.swiper-slide:nth-child(3n) {
+  width: 20%;
+}
+::-webkit-scrollbar {
+  height: 7.5px;
+  width: 7.5px;
+  cursor: pointer;
+}
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+  cursor: pointer;
+}
+::-webkit-scrollbar-thumb {
+  background: grey;
+  border-radius: 10px;
+  cursor: pointer;
+}

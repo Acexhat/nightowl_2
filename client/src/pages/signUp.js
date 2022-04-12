@@ -14,6 +14,7 @@ import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import signUpLogo from '../assets/signup_img.jpg';
 import axios from "axios";
+import { API_PREFIX } from '../utils/Constants';
 
 const theme = createTheme();
 
@@ -33,7 +34,7 @@ export default function SignUp() {
         });
 
         let reqOptions = {
-            url: "http://localhost:5000/api/auth/register",
+            url: `${API_PREFIX}api/auth/register`,
             method: "POST",
             headers: headersList,
             data: bodyContent,
