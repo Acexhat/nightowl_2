@@ -1,2 +1,1 @@
-export const API_PREFIX = ""
-// http://localhost:5000/
+export const API_PREFIX = "http://localhost:5000/"
