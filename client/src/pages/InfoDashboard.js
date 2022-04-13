@@ -250,7 +250,12 @@ const useStyles = makeStyles({
 export default function InfoDashboard(props) {
 
     const classes = useStyles();
-    console.log(props.state);
+
+    const getSubStr = (str) => {
+        const sub = str.substring(0, 30);
+        return sub;
+    }
+
     return (
         <div className={classes.root}>
             <div className={classes.leftContainer}>
@@ -292,7 +297,7 @@ export default function InfoDashboard(props) {
                                         <p className={classes.paragraph}>
                                             {props.state?.pickup_address_detail?.name},{props.state?.pickup_address_detail?.phone}<br />
                                             {props.state?.pickup_address_detail?.email}<br />
-                                            {props.state?.pickup_address_detail?.address}<br />
+                                            {props.state?.pickup_address_detail?.address.length > 30 ? getSubStr(props.state?.pickup_address_detail?.address) : props.state?.pickup_address_detail?.address}<br />
                                             {props.state?.pickup_address_detail?.city}-{props.state?.pickup_address_detail?.pin_code}<br />
                                             {props.state?.pickup_address_detail?.state}
                                         </p>
@@ -302,13 +307,13 @@ export default function InfoDashboard(props) {
                                         <p className={classes.paragraph}>
                                             {props.state?.customer_name},{props.state?.customer_phone}<br />
                                             {props.state?.customer_email}<br />
-                                            {props.state?.customer_address},{props.state?.customer_address_2}<br />
+                                            {props.state?.customer_address}<br />
                                             {props.state?.customer_city}-{props.state?.customer_pincode}<br />
                                             {props.state?.customer_state}
                                         </p>
                                     </div>
                                 </div>
-                            </div>F
+                            </div>
                         </div>
                     </div>
                 </div>

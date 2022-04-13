@@ -38,7 +38,7 @@ export default function TimeLineComp({ data }) {
                     return (
                         <div class="swiper-slide" key={index}>
                             {index !== data?.shipment_track_activities.length - 1 ? (
-                                <Tooltip arrow title={item.status} placement="top">
+                                <Tooltip arrow title={typeof item?.status == 'string' ? item?.status.replace(/_/g, ' ') : item?.status} placement="top">
                                     <div>
                                         <div class="timestamp">
                                             <span class="date">{getDateFormat(item?.date)}</span>

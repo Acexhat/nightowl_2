@@ -10,6 +10,7 @@ import { Avatar } from '@mui/material';
 import QueryStatsIcon from '@mui/icons-material/QueryStats';
 import InfoDashboard from './InfoDashboard';
 import { API_PREFIX } from '../utils/Constants';
+import { LoginComp } from '../atomic/loginComp';
 
 export default function OrderPage(props) {
     const { id } = useParams();
@@ -97,7 +98,6 @@ export default function OrderPage(props) {
                                 <ListItem
                                     onClick={() => handleListItemClick(text)}
                                     style={{
-                                        // backgroundColor: "#388F81",
                                         height: "3rem",
                                         color: "black",
                                         marginLeft: "1rem",
@@ -142,13 +142,7 @@ export default function OrderPage(props) {
                             color: "#FBFBFF",
                         }}> Tracking Dashboard {id} </Typography>
                         <div className="avatarContainer">
-                            <Avatar src={"https://avatars.dicebear.com/api/male/akshatbhskar.png"} style={{
-                                height: "3rem",
-                                width: "3rem",
-                                border: "1px solid #FFFFFF",
-                                boxShadow: "0px 0px 5px #FFFFFF",
-                                cursor: "pointer"
-                            }}>H</Avatar>
+                            <LoginComp />
                         </div>
                     </div>
                 </div>

@@ -8,13 +8,17 @@ import QueryStatsIcon from '@mui/icons-material/QueryStats';
 import { Avatar } from '@mui/material';
 import './styles.css';
 import { API_PREFIX } from '../utils/Constants';
+import { LoginComp } from '../atomic/loginComp';
+import { useDispatch, useSelector } from 'react-redux'
+import { setAllOrders, setCurrPage } from '../store/Actions/actions';
 
 export default function Dashboard(props) {
 
     const [userData, setUserData] = React.useState();
     const [ship_token, setShipToken] = React.useState(localStorage.getItem('ship_token'));
-    const [allOrders, setAllOrders] = React.useState([]);
     const [img, setImg] = React.useState();
+    const disp = useDispatch();
+    const { allOrders, curr_page } = useSelector((state) => state.data)
 
     const getAllOrder = (token, pageNo) => {
         // let headersList = {
@@ -38,7 +42,7 @@ export default function Dashboard(props) {
         }
 
         axios.request(reqOptions).then(function (response) {
-            setAllOrders([...allOrders, ...response.data.data.data])
+            disp(setAllOrders(response.data.data.data));
         }).catch((err) => {
             console.log(err);
         })
@@ -54,7 +58,7 @@ export default function Dashboard(props) {
                 }
 
                 let reqOptions = {
-                    url: `${API_PREFIX}/api/ship/login`,
+                    url: `${API_PREFIX}api/ship/login`,
                     method: "POST",
                     headers: headersList,
                 }
@@ -94,12 +98,24 @@ export default function Dashboard(props) {
 
     React.useEffect(() => {
         if (ship_token) {
-            getAllOrder(ship_token, 1);
+            if (allOrders?.length <= 0)
+                getAllOrder(ship_token, 1);
+            else {
+                console.log(allOrders)
+            }
         }
     }, [ship_token])
 
     const getMoreOrder = (pageNo) => {
-        getAllOrder(ship_token, pageNo + 1);
+        console.log(pageNo)
+        if (pageNo + 1 <= curr_page) {
+            console.log(curr_page)
+        } else {
+            console.log(curr_page)
+            getAllOrder(ship_token, pageNo + 1);
+            disp(setCurrPage(curr_page + 1))
+            // curr_page.current = curr_page.current + 1;
+        }
     }
 
     return (
@@ -187,13 +203,7 @@ export default function Dashboard(props) {
                             color: "#FBFBFF",
                         }}> Order Overview </Typography>
                         <div className="avatarContainer">
-                            <Avatar src={"https://avatars.dicebear.com/api/male/akshatbhskar.png"} style={{
-                                height: "3rem",
-                                width: "3rem",
-                                border: "1px solid #FFFFFF",
-                                boxShadow: "0px 0px 5px #FFFFFF",
-                                cursor: "pointer"
-                            }}>H</Avatar>
+                            <LoginComp />
                         </div>
                     </div>
                 </div>

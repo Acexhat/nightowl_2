@@ -1,0 +1,2 @@
+export const SET_ALL_ORDERS = "SET_ALL_ORDERS"
+export const SET_CURR_PAGE = "SET_CURR_PAGE"
