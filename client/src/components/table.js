@@ -233,11 +233,11 @@ export default function TableDetails({ originalRows, getMoreOrder }) {
                                                 color: "blue",
                                                 cursor: "pointer"
                                             }} key={column.id} align={column.align} onClick={(e) => handleOrderClicked(e, row)}>
-                                                {column.format && typeof value === 'number' ? column.format(value) : value}
+                                                {column.format && typeof value === 'number' ? column.format(value) || "N/A" : value || "N/A"}
                                             </TableCell>
                                                 :
                                                 <TableCell key={column.id} align={column.align}>
-                                                    {column.format && typeof value === 'number' ? column.format(value) : value}
+                                                    {column.format && typeof value === 'number' ? column.format(value) || "N/A" : value || "N/A"}
                                                 </TableCell>
                                         );
                                     })}
