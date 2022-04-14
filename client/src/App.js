@@ -14,7 +14,7 @@ import SocketIoClient from 'socket.io-client';
 
 function App() {
   React.useEffect(() => {
-    const socket = SocketIoClient('http://localhost:5000');
+    const socket = SocketIoClient('https://logistics-tracker.herokuapp.com');
     socket.on('connect', () => {
       console.log('connected');
     });

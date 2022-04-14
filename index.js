@@ -44,7 +44,7 @@ const server = app.listen(PORT, () =>
 const io = socketIo(server, {
     cors: {
         // origin: "http://localhost:3000",
-        origin: "https://logistics-tracker.herokuapp.com/",
+        origin: "https://logistics-tracker.herokuapp.com",
         methods: ["GET", "POST"],
         allowedHeaders: ["my-custom-header"],
         credentials: true
