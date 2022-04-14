@@ -255,6 +255,9 @@ export default function InfoDashboard(props) {
         const sub = str.substring(0, 30);
         return sub;
     }
+    const handleCall = () => {
+        window.location.href = `tel:5555551234`;
+    }
 
     return (
         <div className={classes.root}>
@@ -350,7 +353,7 @@ export default function InfoDashboard(props) {
                                 </div>
                                 <div className={classes.calldiv}>
                                     <div className={classes.call_content}>
-                                        <Button variant="contained" className={classes.btn} startIcon={<CallIcon />}>
+                                        <Button onClick={() => handleCall()} variant="contained" className={classes.btn} startIcon={<CallIcon />}>
                                             Delivery
                                         </Button>
                                     </div>
@@ -360,7 +363,7 @@ export default function InfoDashboard(props) {
                                         backgroundColor: "grey"
                                     }} />
                                     <div className={classes.call_content}>
-                                        <Button variant="contained" className={classes.btn} startIcon={<CallIcon />}>
+                                        <Button onClick={() => handleCall()} variant="contained" className={classes.btn} startIcon={<CallIcon />}>
                                             Buyer
                                         </Button>
                                     </div>

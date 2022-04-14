@@ -9,7 +9,7 @@ const connectDB = require("./config/db");
 const errorHandler = require("./src/middlewares/error");
 const cors = require('cors');
 var path = require('path');
-
+const { getAllShipment, getAllShipmentLocation } = require("./src/controllers/ship");
 
 connectDB();
 //uncommented it
@@ -44,7 +44,7 @@ const server = app.listen(PORT, () =>
 const io = socketIo(server, {
     cors: {
         // origin: "http://localhost:3000",
-        origin: "https://logistics-tracker.herokuapp.com",
+        origin: '*',
         methods: ["GET", "POST"],
         allowedHeaders: ["my-custom-header"],
         credentials: true
@@ -54,15 +54,17 @@ const io = socketIo(server, {
 io.on("connection", (socket) => {
     console.log("New client connected");
 
-    setInterval(() => getApiAndEmit(socket), 5000);
+    setInterval(() => getApiAndEmit(socket), 10000);
 
     socket.on("disconnect", () => console.log("Client disconnected"));
 });
 
-const getApiAndEmit = socket => {
+const getApiAndEmit = async socket => {
     try {
-        // const res = await axios.get("https://api.covid19india.org/data.json");
-        socket.emit("FromAPI", 'Hello Each time');
+        const res = await getAllShipment();
+        socket.emit("FromAPI", res);
+        const loc = await getAllShipmentLocation();
+        socket.emit("FromLocations",loc);
     }
     catch (error) {
         console.log(error);

@@ -31,7 +31,7 @@ export default function DetailDialog(props) {
                 <div className={["modal-dialog", "modal-dialog-centered"]}>
                     <div className={"modal-content"}>
                         <div className={"modal-header"}>
-                            <h4 className={"modal-title"}>{props.data.products[0].name}<br></br>{props.data.products[0].channel_order_product_id}</h4>
+                            <h4 className={"modal-title"}>{props?.data?.products[0].name}<br></br>{props.data.products[0].channel_order_product_id}</h4>
                             <div className={"modal-body"}>
                                 <div className={"container"}>
                                     <h6>Item Details</h6>
@@ -70,7 +70,7 @@ export default function DetailDialog(props) {
                                         </div>
                                         <div className="col-xs-6">
                                             <ul type={"none"}>
-                                                <li className={"left"}>{props.data.shipments[0].delivered_date || "Currently Not Available"}</li>
+                                                <li className={"left"}>{props?.data?.shipments[0] && props?.data?.shipments[0] ? props?.data?.shipments[0]?.delivered_date : props?.data?.shipments?.delivered_date || "Currently Not Available"}</li>
                                             </ul>
                                         </div>
                                     </div>

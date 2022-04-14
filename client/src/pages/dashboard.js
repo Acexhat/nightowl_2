@@ -9,8 +9,10 @@ import { Avatar } from '@mui/material';
 import './styles.css';
 import { API_PREFIX } from '../utils/Constants';
 import { LoginComp } from '../atomic/loginComp';
+import MapIcon from '@mui/icons-material/Map';
 import { useDispatch, useSelector } from 'react-redux'
 import { setAllOrders, setCurrPage } from '../store/Actions/actions';
+import LiveMap from '../components/livemap/liveMap';
 
 export default function Dashboard(props) {
 
@@ -18,7 +20,8 @@ export default function Dashboard(props) {
     const [ship_token, setShipToken] = React.useState(localStorage.getItem('ship_token'));
     const [img, setImg] = React.useState();
     const disp = useDispatch();
-    const { allOrders, curr_page } = useSelector((state) => state.data)
+    const { allOrders, curr_page } = useSelector((state) => state.data);
+    const [isMap, setIsMap] = React.useState(false);
 
     const getAllOrder = (token, pageNo) => {
         // let headersList = {
@@ -118,6 +121,14 @@ export default function Dashboard(props) {
         }
     }
 
+    const handleListItemClick = (item) => {
+        if (item === 'Map Tracking') {
+            setIsMap(true);
+        } else {
+            setIsMap(false);
+        }
+    }
+
     return (
         <div style={{
             height: "100vh",
@@ -146,7 +157,7 @@ export default function Dashboard(props) {
                         padding: "0.5rem"
                     }} src={logo} alt="logo" />
                     <List>
-                        {['Orders', 'Tracking Dashboard'].map((text, index) => (
+                        {['Orders', 'Map Tracking'].map((text, index) => (
                             <div style={{
                                 display: "flex"
                             }}>
@@ -157,7 +168,7 @@ export default function Dashboard(props) {
                                     borderRadius: "0px 4px 4px 0px"
                                 }}>
                                 </div> : null}
-                                <ListItem style={{
+                                <ListItem onClick={() => handleListItemClick(text)} style={{
                                     // backgroundColor: "#388F81",
                                     height: "3rem",
                                     color: "black",
@@ -168,7 +179,7 @@ export default function Dashboard(props) {
                                     <ListItemIcon style={{
                                         color: "black",
                                     }}>
-                                        {index % 2 === 0 ? <BackupTableIcon /> : <QueryStatsIcon />}
+                                        {index % 2 === 0 ? <BackupTableIcon /> : <MapIcon />}
                                     </ListItemIcon>
                                     <ListItemText primary={text} />
                                 </ListItem>
@@ -217,8 +228,16 @@ export default function Dashboard(props) {
                     position: "absolute",
                     top: "7.5%",
                 }}>
-                    {allOrders?.length > 0 ? <TableDetails style={{
-                    }} originalRows={allOrders} getMoreOrder={getMoreOrder} /> : <CircularProgress />}
+                    {!isMap ? allOrders?.length > 0 ? <TableDetails style={{
+                    }} originalRows={allOrders} getMoreOrder={getMoreOrder} /> : <CircularProgress /> : <div
+                        style={{
+                            height: "95%",
+                            width: "95%",
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                        }}
+                    ><LiveMap /></div>}
                 </div>
             </div>
             {/* </div> */}

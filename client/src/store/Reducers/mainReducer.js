@@ -8,6 +8,15 @@ const mainReducer = (state = gloablStates, action) => {
 
         case type.SET_CURR_PAGE:
             return { ...state, curr_page: action.payload }
+
+        case type.UPDATE_SHIPMENTS:
+            return { ...state, allShipments: action.payload }
+
+        case type.UPDATE_LOCATIONS:
+            return { ...state, allLatLangs: action.payload }
+
+        case type.SET_ORDERS_BY_SHIPMENTS:
+            return { ...state, ordersByShipments: action.payload }
         default:
             return state;
     }

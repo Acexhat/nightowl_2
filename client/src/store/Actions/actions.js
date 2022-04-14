@@ -12,3 +12,24 @@ export const setCurrPage = (data) => {
         payload: data
     }
 }
+
+export const updateShipments = (data) => {
+    return {
+        type: Constants.UPDATE_SHIPMENTS,
+        payload: data
+    }
+}
+
+export const updateLocations = (data) => {
+    return {
+        type: Constants.UPDATE_LOCATIONS,
+        payload: data
+    }
+}
+
+export const setOrdersByShipments = (data) => {
+    return {
+        type: Constants.SET_ORDERS_BY_SHIPMENTS,
+        payload: data
+    }
+}
