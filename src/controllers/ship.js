@@ -54,7 +54,7 @@ exports.getAllOrders = async (req, res, next) => {
 exports.getTrackingDetails = async (req, res, next) => {
     const working_shipment_ids = [191686343, 193234428, 193234500, 193234599, 193235366, 193235441, 193235510, 193260621, 193264210, 197340105]
     let shipmentId = working_shipment_ids[Math.floor(Math.random() * working_shipment_ids.length)];
-    let token = req.headers.authorization.split(" ")[1];
+    let token = req.headers.authorization.split(" ")[1] || "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjI0OTc2MDIsImlzcyI6Imh0dHBzOi8vYXBpdjIuc2hpcHJvY2tldC5pbi92MS9leHRlcm5hbC9hdXRoL2xvZ2luIiwiaWF0IjoxNjQ5ODY1OTI2LCJleHAiOjE2NTA3Mjk5MjYsIm5iZiI6MTY0OTg2NTkyNiwianRpIjoiZHVaSXZlQXNBdEQ1UEx6QiJ9.uh149MxEnC-Nj4xMRhS-8LYBUI-V0KC1akTi6yvcVkM";
     var config = {
         method: 'get',
         url: `https://apiv2.shiprocket.in/v1/external/courier/track/shipment/${shipmentId}`,
