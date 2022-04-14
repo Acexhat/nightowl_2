@@ -80,7 +80,6 @@ exports.getTrackingDetails = async (req, res, next) => {
 
 exports.getlatlang = async (req, res, next) => {
     const { address } = req.body;
-    console.log(address)
     var config = {
         method: 'get',
         url: `http://api.radar.io/v1/geocode/forward?query=${address}`,
@@ -99,3 +98,91 @@ exports.getlatlang = async (req, res, next) => {
             res.status(403)
         });
 }
+
+exports.getAllShipment = async (req, res, next) => {
+    const working_shipment_ids = [191686343, 193234428, 193234500, 193234599, 193235366, 193235441, 193235510, 193260621, 193264210, 197340105]
+    let shipmentURLs = working_shipment_ids.map(shipmentId => `https://apiv2.shiprocket.in/v1/external/courier/track/shipment/${shipmentId}`)
+    let token = req.headers.authorization.split(" ")[1];
+    const fetchUrl = (url, token) => {
+        var config = {
+            method: 'get',
+            url: url,
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+        };
+        return axios(config)
+            .then(function (response) {
+                return {
+                    success: true,
+                    data: response.data,
+                };
+            })
+            .catch(function (error) {
+                res.status(403)
+            });
+    }
+    const promiseArray = shipmentURLs.map((url) => fetchUrl(url, token));
+    Promise.all(promiseArray).then((response) => {
+        return res.send(response);
+    })
+}
+
+exports.getAllShipmentLocation = (req, res, next) => {
+    const locations = ['rohini', 'pitampura', 'mumbai']
+    let locationUrls = locations.map(location => `http://api.radar.io/v1/geocode/forward?query=${location}`)
+    const fetchUrl = (url) => {
+        var config = {
+            method: 'get',
+            url: url,
+            headers: {
+                'Authorization': 'prj_live_sk_9493aeeb5ed665c75c611da2dc7379d296dea19d'
+            }
+        };
+        return axios(config)
+            .then(function (response) {
+                return {
+                    success: true,
+                    data: response.data
+                }
+            })
+            .catch(function (error) {
+                res.status(403)
+            });
+    }
+    const promiseArray = locationUrls.map((url) => fetchUrl(url));
+    Promise.all(promiseArray).then((response) => {
+        return res.send(response);
+    })
+}
+
+exports.getAllOrdersById = (req, res, next) => {
+    const orderIDs = [192165293, 193715700, 193715772, 193715871, 193716639, 193716713, 193716783, 193741912, 193745506, 197828898]
+    const orderURLs = orderIDs.map(orderId => `https://apiv2.shiprocket.in/v1/external/orders/show/${orderId}`)
+    let token = req.headers.authorization.split(" ")[1];
+    const fetchUrl = (url, token) => {
+        var config = {
+            method: 'get',
+            url: url,
+            headers: {
+                'Authorization': `Bearer ${token}`
+            },
+        };
+
+        return axios(config)
+            .then(function (response) {
+                return {
+                    success: true,
+                    data: response.data
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+    const promiseArray = orderURLs.map((url) => fetchUrl(url, token));
+    Promise.all(promiseArray).then((response) => {
+        return res.send(response);
+    })
+} 

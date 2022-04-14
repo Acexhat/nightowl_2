@@ -10,9 +10,20 @@ import {
 import AuthDashboard from './pages/authenticationDashboard';
 import Dashboard from './pages/dashboard';
 import OrderPage from './pages/orderPage';
+import SocketIoClient from 'socket.io-client';
 
 function App() {
   React.useEffect(() => {
+    const socket = SocketIoClient('http://localhost:5000');
+    socket.on('connect', () => {
+      console.log('connected');
+    });
+    socket.on('disconnect', () => {
+      console.log('disconnected');
+    });
+    socket.on('FromAPI', (data) => {
+      console.log(data);
+    });
   }, [])
 
   return (

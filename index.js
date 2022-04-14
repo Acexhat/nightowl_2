@@ -1,5 +1,8 @@
 require("dotenv").config()
 const express = require("express");
+const http = require("http");
+const socketIo = require("socket.io");
+const axios = require("axios");
 const bodyParser = require('body-parser')
 const app = express();
 const connectDB = require("./config/db");
@@ -37,6 +40,34 @@ if (process.env.NODE_ENV === "production") {
 const server = app.listen(PORT, () =>
     console.log(`Sever running on port ${PORT}`)
 );
+
+const io = socketIo(server, {
+    cors: {
+        // origin: "http://localhost:3000",
+        origin: "https://logistics-tracker.herokuapp.com/",
+        methods: ["GET", "POST"],
+        allowedHeaders: ["my-custom-header"],
+        credentials: true
+    }
+})
+
+io.on("connection", (socket) => {
+    console.log("New client connected");
+
+    setInterval(() => getApiAndEmit(socket), 5000);
+
+    socket.on("disconnect", () => console.log("Client disconnected"));
+});
+
+const getApiAndEmit = socket => {
+    try {
+        // const res = await axios.get("https://api.covid19india.org/data.json");
+        socket.emit("FromAPI", 'Hello Each time');
+    }
+    catch (error) {
+        console.log(error);
+    }
+}
 
 process.on("unhandledRejection", (err, promise) => {
     console.log(`Logged Error: ${err.message}`);

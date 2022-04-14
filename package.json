@@ -40,6 +40,7 @@
     "parser": "^0.1.4",
     "react-beautiful-horizontal-timeline": "^6.0.3",
     "react-horizontal-timeline": "^1.5.3",
+    "socket.io": "^4.4.1",
     "uuid": "^8.3.2"
   }
 }
